@@ -102,6 +102,8 @@ public class TableToConsoleOut {
     private <T> void setMaxLength(List<T> list) {
         methodsAdjustment(list.getFirst());
         sizeReset();
+        if(getLength(list.size())+2 > columnWidth.getFirst())
+            columnWidth.set(0, getLength(list.size())+2);
         for (T obj : list) {
             int columnPos = 1;
             for (Method method : methods) {
@@ -166,8 +168,8 @@ public class TableToConsoleOut {
         for (int i = 0; i < list.size(); i++) {
             int methodCount = 1;
             if(enumerate) {
-                System.out.print("| " + (i + 1) + " ");
-                setTab(0, getLength(i) + 3);
+                System.out.print("| " + (i + 1));
+                setTab(0, getLength(i + 1) + 2);
             }
             System.out.print("|");
             for (Method method : methods) {
